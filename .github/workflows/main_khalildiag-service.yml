@@ -48,10 +48,8 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2 # Updated to the latest version
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_BBF0CBBB35B445C88E0B702C6AF37772 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6CF9EF1C057A4ACF85F2479688E3A611 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2200CA7A43454451B13059E0123EAB2A }}
-          auth-type: 'SERVICE_PRINCIPAL' # Use SERVICE_PRINCIPAL for authentication
+          auth-type: 'federated' # Use federated authentication
+          # No need to specify client-id, tenant-id, or subscription-id when using federated identity
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
