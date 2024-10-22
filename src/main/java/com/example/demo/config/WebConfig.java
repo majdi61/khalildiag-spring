@@ -12,10 +12,16 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("https://khalildiag-web-admin.web.app/","https://khalildiag-2a0e5.web.app/","https://khalildiag.com/","http://127.0.0.1:5500/")
-                .allowedMethods("*")
+                .allowedOrigins(
+                        "https://khalildiag-web-admin.web.app/",
+                        "https://khalildiag-2a0e5.web.app/",
+                        "https://khalildiag.com/",
+                        "http://127.0.0.1:5500/"
+                )
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Explicitly list methods
                 .allowedHeaders("header1", "header2", "header3")
                 .exposedHeaders("header1", "header2")
-                .allowCredentials(false).maxAge(3600);
+                .allowCredentials(false)
+                .maxAge(3600);
     }
 }
