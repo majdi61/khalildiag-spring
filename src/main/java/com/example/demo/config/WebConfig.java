@@ -19,8 +19,6 @@ public class WebConfig implements WebMvcConfigurer {
                         "http://127.0.0.1:5500/"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Explicitly list methods
-                .allowedHeaders("Content-Type", "Authorization", "Accept", "X-Requested-With") // Include necessary headers
-                .exposedHeaders("X-Total-Count", "X-Auth-Token") // Exposing these headers to the client
                 .allowCredentials(false)
                 .maxAge(3600);
     }

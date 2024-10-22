@@ -39,13 +39,11 @@ public class ModelResource {
         this.modelService = modelService;
     }
 
-    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @GetMapping("")
     public Page<Model> getLinksPage(@Filter(entityClass = Model.class) Document document, Pageable pageable) {
         return modelService.getModelsPage(document, pageable);
     }
 
-    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @PostMapping("")
     public ResponseEntity<Model> saveModel(@RequestBody Model model) throws URISyntaxException {
         log.debug("REST request to save Model : {}", model);
@@ -56,7 +54,6 @@ public class ModelResource {
             .body(result);
     }
 
-    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @GetMapping("/{id}")
     public ResponseEntity<Model> getModelById(@PathVariable("id") String id) {
         log.debug("REST request to get Model : {}", id);
@@ -64,7 +61,6 @@ public class ModelResource {
         return ResponseUtil.wrapOrNotFound(model);
     }
 
-    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteModel(@PathVariable("id") String id) {
         log.debug("REST request to delete Model : {}", id);
