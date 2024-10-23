@@ -22,7 +22,6 @@ import java.util.Optional;
 /**
  * REST controller for managing {@link com.khalildiag.service.domain.Category}.
  */
-@CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
 @RestController
 @RequestMapping("/api/category")
 public class CategoryResource {

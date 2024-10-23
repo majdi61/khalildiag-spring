@@ -39,11 +39,13 @@ public class MarqueResource {
         this.marqueService = marqueService;
     }
 
+    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @GetMapping("")
     public Page<Marque> getLinksPage(@Filter(entityClass = Marque.class) Document document, Pageable pageable) {
         return marqueService.getMarquesPage(document, pageable);
     }
 
+    @CrossOrigin(origins = "origins = \"https://khalildiag-web-admin.web.app/")
     @PostMapping("")
     public ResponseEntity<Marque> saveMarque(@RequestBody Marque marque) throws URISyntaxException {
         log.debug("REST request to save Marque : {}", marque);
@@ -55,6 +57,7 @@ public class MarqueResource {
             .body(result);
     }
 
+    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @GetMapping("/{id}")
     public ResponseEntity<Marque> getMarqueById(@PathVariable("id") String id) {
         log.debug("REST request to get Marque : {}", id);
@@ -62,6 +65,7 @@ public class MarqueResource {
         return ResponseUtil.wrapOrNotFound(marque);
     }
 
+    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMarque(@PathVariable("id") String id) {
         log.debug("REST request to delete Marque : {}", id);
