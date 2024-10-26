@@ -19,9 +19,6 @@ public class ProduitDto {
     private String cylindre;   // Category label
     private List<String> imgUrls;   // List of image URLs
 
-    public ProduitDto(String id, String ref, String label, String denomination, String etat, String marqueLabel, String modelLabel, String categoryLabel, List<String> imgUrls) {
-    }
-
     public String getId() {
         return id;
     }
