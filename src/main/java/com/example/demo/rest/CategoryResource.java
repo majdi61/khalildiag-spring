@@ -45,6 +45,8 @@ public class CategoryResource {
         return categoryService.getCategorysPage(document, pageable);
     }
 
+
+
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @PostMapping("")
     public ResponseEntity<Category> saveCategory(@RequestBody Category category) throws URISyntaxException {
