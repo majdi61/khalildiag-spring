@@ -3,6 +3,7 @@ package com.example.demo.rest;
 
 import com.example.demo.domain.Produit;
 import com.example.demo.service.ProduitService;
+import com.example.demo.service.dto.ProduitDto;
 import com.turkraft.springfilter.boot.Filter;
 import org.bson.Document;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class ProduitResource {
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @GetMapping("")
-    public Page<Produit> getLinksPage(@Filter(entityClass = Produit.class) Document document, Pageable pageable) {
+    public Page<ProduitDto> getLinksPage(@Filter(entityClass = Produit.class) Document document, Pageable pageable) {
         return produitService.getProduitsPage(document, pageable);
     }
 

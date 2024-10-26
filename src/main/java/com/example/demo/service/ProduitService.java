@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
 
+import com.example.demo.domain.ImgUrl;
 import com.example.demo.domain.Produit;
 import com.example.demo.repository.ProduitRepository;
+import com.example.demo.service.dto.ProduitDto;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProduitService {
@@ -34,13 +38,10 @@ public class ProduitService {
         return produitRepository.save(produit);
     }
 
-    public Page<Produit> getProduitsPage(Document document, Pageable pageable) {
-        //        document = Optional.ofNullable(document).orElse(new Document());
-        //        log.debug("doc: {}", document);
-        //        // add removed = false by default. removed links should be returned in
-        //        document.putIfAbsent("removed", false);
-        //        log.debug("doc: {}", document);
-        return produitRepository.filter(document, pageable);
+    public Page<ProduitDto> getProduitsPage(Document document, Pageable pageable) {
+        Page<Produit> produitPage = produitRepository.filter(document, pageable);
+
+        return produitPage.map(this::convertToDto);
     }
 
     public Optional<Produit> findOne(String id) {
@@ -51,5 +52,19 @@ public class ProduitService {
     public void delete(String id) {
         log.debug("Request to delete Produit : {}", id);
         produitRepository.deleteById(id);
+    }
+
+    private ProduitDto convertToDto(Produit produit) {
+        List<String> imgUrls = produit.getImgUrlList().stream()
+                .map(ImgUrl::getPath) // Assuming ImgUrl has a getUrl method
+                .collect(Collectors.toList());
+        return new ProduitDto(
+                produit.getId(),
+                produit.getLabel(),
+                produit.getMarqueLabel(),
+                produit.getModelLabel(),
+                produit.getCylindre(),
+                imgUrls
+        );
     }
 }
