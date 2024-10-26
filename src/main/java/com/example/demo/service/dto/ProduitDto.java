@@ -10,6 +10,7 @@ import java.util.List;
  * A DTO for the Produit entity.
  */
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class ProduitDto {
     private String id;             // Assuming you want to expose the ID
@@ -19,60 +20,4 @@ public class ProduitDto {
     private String cylindre;   // Category label
     private List<String> imgUrls;   // List of image URLs
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getMarqueLabel() {
-        return marqueLabel;
-    }
-
-    public void setMarqueLabel(String marqueLabel) {
-        this.marqueLabel = marqueLabel;
-    }
-
-    public String getModelLabel() {
-        return modelLabel;
-    }
-
-    public void setModelLabel(String modelLabel) {
-        this.modelLabel = modelLabel;
-    }
-
-    public String getCylindre() {
-        return cylindre;
-    }
-
-    public void setCylindre(String cylindre) {
-        this.cylindre = cylindre;
-    }
-
-    public List<String> getImgUrls() {
-        return imgUrls;
-    }
-
-    public void setImgUrls(List<String> imgUrls) {
-        this.imgUrls = imgUrls;
-    }
-
-    public ProduitDto(String id, String label, String marqueLabel, String modelLabel, String cylindre, List<String> imgUrls) {
-        this.id = id;
-        this.label = label;
-        this.marqueLabel = marqueLabel;
-        this.modelLabel = modelLabel;
-        this.cylindre = cylindre;
-        this.imgUrls = imgUrls;
-    }
 }
