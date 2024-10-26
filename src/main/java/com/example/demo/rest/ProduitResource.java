@@ -51,11 +51,14 @@ public class ProduitResource {
         this.produitRepository = produitRepository;
     }
 
+
+
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
-    @GetMapping("/aaa")
-    public Page<ProduitDto> getProduitsDtoPage(@Filter(entityClass = ProduitDto.class) Document document, Pageable pageable) {
+    @GetMapping("")
+    public Page<ProduitDto> getProduitsPage(@Filter(entityClass = ProduitDto.class) Document document, Pageable pageable) {
         return produitService.getProduitsPage(document, pageable);
     }
+
 
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")

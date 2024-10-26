@@ -21,6 +21,6 @@ public class DemoApplication {
 
 	@RequestMapping("/")
 	public String test (){
-		return "working server on microsfot azure vps";
+		return "working server on microsfot azure vps 1";
 	}
 }
