@@ -55,12 +55,6 @@ public class ProduitResource {
     }
 
 
-    @GetMapping("/test-produits")
-    public List<ProduitDto> testProduits() {
-        // Directly fetch from the repository and convert
-        List<Produit> produits = produitRepository.findAll();
-        return produits.stream().map(this::convertToDto).collect(Collectors.toList());
-    }
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @PostMapping("")

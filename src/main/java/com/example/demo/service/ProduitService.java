@@ -39,9 +39,7 @@ public class ProduitService {
     }
 
     public Page<ProduitDto> getProduitsPage(Document document, Pageable pageable) {
-        Page<Produit> produitPage = produitRepository.filter(document, pageable);
-
-        return produitPage.map(this::convertToDto);
+        return  produitRepository.filter(document, pageable);
     }
 
     public Optional<Produit> findOne(String id) {
@@ -54,17 +52,4 @@ public class ProduitService {
         produitRepository.deleteById(id);
     }
 
-    private ProduitDto convertToDto(Produit produit) {
-        List<String> imgUrls = produit.getImgUrlList().stream()
-                .map(ImgUrl::getPath) // Assuming ImgUrl has a getUrl method
-                .collect(Collectors.toList());
-        return new ProduitDto(
-                produit.getId(),
-                produit.getLabel(),
-                produit.getMarqueLabel(),
-                produit.getModelLabel(),
-                produit.getCylindre(),
-                imgUrls
-        );
-    }
 }
