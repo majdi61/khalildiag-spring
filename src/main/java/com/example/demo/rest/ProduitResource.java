@@ -59,14 +59,6 @@ public class ProduitResource {
 
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
-    @GetMapping("")
-    public Page<ProduitDto> getProduitsPage(@Filter(entityClass = ProduitDto.class) Document document, Pageable pageable) {
-        return produitService.getProduitsPage(document, pageable);
-    }
-
-
-
-    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @PostMapping("")
     public ResponseEntity<Produit> saveProduit(@RequestBody Produit produit) throws URISyntaxException {
         Produit result = produitService.save(produit);
