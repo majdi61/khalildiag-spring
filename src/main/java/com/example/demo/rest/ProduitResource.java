@@ -58,15 +58,13 @@ public class ProduitResource {
     }
 
 
-    @GetMapping("/test-produits")
-    public ResponseEntity<List<ProduitDto>> testProduits() {
-        try {
-            // Temporarily return a static response to isolate issues
-            return ResponseEntity.ok(Arrays.asList(new ProduitDto("1", "ref1", "label1", "denomination1", "etat1", "marqueLabel1", "modelLabel1", "categoryLabel1", new ArrayList<>())));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
+    @GetMapping("")
+    public Page<ProduitDto> getProduitsPage(@Filter(entityClass = ProduitDto.class) Document document, Pageable pageable) {
+        return produitService.getProduitsPage(document, pageable);
     }
+
+
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @PostMapping("")

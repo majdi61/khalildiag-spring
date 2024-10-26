@@ -1,7 +1,6 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Produit;
-import com.example.demo.service.dto.ProduitDto;
 import org.bson.Document;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,7 @@ public interface ProduitRepository extends MongoRepository<Produit, String> {
     List<Produit> filter(Document document);
 
     @Query("?0")
-    Page<ProduitDto> filter(Document document, Pageable pageable);
+    Page<Produit> filter(Document document, Pageable pageable);
 
 
 

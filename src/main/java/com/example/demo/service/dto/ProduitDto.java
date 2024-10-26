@@ -21,6 +21,5 @@ public class ProduitDto {
     private String cylindre;   // Category label
     private List<String> imgUrls;   // List of image URLs
 
-    public <E> ProduitDto(String s, String ref1, String label1, String denomination1, String etat1, String marqueLabel1, String modelLabel1, String categoryLabel1, ArrayList<E> es) {
-    }
+
 }
