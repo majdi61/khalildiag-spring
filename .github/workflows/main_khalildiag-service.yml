@@ -45,16 +45,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: java-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4118A8B89B09414E870A0419E3D10943 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EBD45DF5F44642E69640E6F86A76EB1D }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E159F69C44734C799A932A0D1DE29238 }}
-      - name: Set Clean Deployment Environment Variable
-        run: |
-          az webapp config appsettings set --name khalildiag-service --resource-group khalildiag --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -63,4 +60,14 @@ jobs:
           app-name: 'khalildiag-service'
           slot-name: 'Production'
           package: '*.war'
-          
+
+      - name: Set WEBSITE_DISABLE_SCM_SEPARATION environment variable
+        run: |
+          az webapp config appsettings set --name 'khalildiag-service' \
+          --resource-group 'khalildiag' \
+          --settings WEBSITE_DISABLE_SCM_SEPARATION=1
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4118A8B89B09414E870A0419E3D10943 }}
+          AZURE_TENANT_ID: ${{ secrets.AZUREAPPSERVICE_TENANTID_EBD45DF5F44642E69640E6F86A76EB1D }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E159F69C44734C799A932A0D1DE29238 }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZUREAPPSERVICE_CLIENTSECRET }}
