@@ -37,13 +37,22 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
       
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4118A8B89B09414E870A0419E3D10943 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_EBD45DF5F44642E69640E6F86A76EB1D }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E159F69C44734C799A932A0D1DE29238 }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -51,4 +60,4 @@ jobs:
           app-name: 'khalildiag-service'
           slot-name: 'Production'
           package: '*.war'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_44C98C1FE5FD4FD39E1ED75B1857FC72 }}
+          
