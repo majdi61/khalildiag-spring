@@ -39,11 +39,11 @@ public class ProduitService {
         return produitRepository.save(produit);
     }
 
-    public Page<ProduitDto> getProduitsPage(Document document, Pageable pageable) {
+    public Page<Produit> getProduitsPage(Document document, Pageable pageable) {
         Page<Produit> produits = produitRepository.filter(document, pageable);
 
         // Convert the page of Produit to a page of ProduitDto
-        return produits.map(ProduitMapper::toDto);
+        return produits;
     }
 
     public Optional<Produit> findOne(String id) {

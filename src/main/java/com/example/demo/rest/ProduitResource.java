@@ -51,7 +51,7 @@ public class ProduitResource {
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
     @GetMapping("")
-    public Page<ProduitDto> getProduitsPage(@Filter(entityClass = ProduitDto.class) Document document, Pageable pageable) {
+    public Page<Produit> getProduitsPage(@Filter(entityClass = ProduitDto.class) Document document, Pageable pageable) {
         return produitService.getProduitsPage(document, pageable);
     }
 
