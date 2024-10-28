@@ -4,6 +4,7 @@ package com.example.demo.rest;
 import com.example.demo.domain.Model;
 import com.example.demo.service.ModelService;
 import com.turkraft.springfilter.boot.Filter;
+import org.apache.tomcat.util.http.HeaderUtil;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,16 +13,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.ResponseUtil;
+
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-/**
- * REST controller for managing {@link com.khalildiag.service.domain.Model}.
- */
 @RestController
 @RequestMapping("/api/models")
 public class ModelResource {
@@ -52,7 +49,6 @@ public class ModelResource {
         Model result = modelService.save(model);
         return ResponseEntity
             .created(new URI("/api/models/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId()))
             .body(result);
     }
 
@@ -61,7 +57,7 @@ public class ModelResource {
     public ResponseEntity<Model> getModelById(@PathVariable("id") String id) {
         log.debug("REST request to get Model : {}", id);
         Optional<Model> model = modelService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(model);
+        return ResponseEntity.accepted().body(model.get());
     }
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
@@ -69,6 +65,6 @@ public class ModelResource {
     public ResponseEntity<Void> deleteModel(@PathVariable("id") String id) {
         log.debug("REST request to delete Model : {}", id);
         modelService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent().build();
     }
 }

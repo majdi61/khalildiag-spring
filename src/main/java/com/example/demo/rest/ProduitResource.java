@@ -7,29 +7,26 @@ import com.example.demo.repository.ProduitRepository;
 import com.example.demo.service.ProduitService;
 import com.example.demo.service.dto.ProduitDto;
 import com.turkraft.springfilter.boot.Filter;
+import org.apache.tomcat.util.http.HeaderUtil;
+import org.apache.tomcat.util.http.ResponseUtil;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.ResponseUtil;
+
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * REST controller for managing {@link com.khalildiag.service.domain.Produit}.
- */
+
 @RestController
 @RequestMapping("/api/produits")
 public class ProduitResource {
@@ -67,7 +64,6 @@ public class ProduitResource {
         Produit result = produitService.save(produit);
         return ResponseEntity
             .created(new URI("/api/produits/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId()))
             .body(result);
     }
 
@@ -76,7 +72,7 @@ public class ProduitResource {
     public ResponseEntity<Produit> getProduitById(@PathVariable("id") String id) {
         log.debug("REST request to get Produit : {}", id);
         Optional<Produit> produit = produitService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(produit);
+        return ResponseEntity.accepted().body(produit.get());
     }
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
@@ -84,7 +80,7 @@ public class ProduitResource {
     public ResponseEntity<Void> deleteProduit(@PathVariable("id") String id) {
         log.debug("REST request to delete Produit : {}", id);
         produitService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent().build();
     }
 
     private ProduitDto convertToDto(Produit produit) {

@@ -12,9 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.ResponseUtil;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
@@ -53,7 +50,6 @@ public class MarqueResource {
         Marque result = marqueService.save(marque);
         return ResponseEntity
             .created(new URI("/api/marques/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId()))
             .body(result);
     }
 
@@ -62,7 +58,7 @@ public class MarqueResource {
     public ResponseEntity<Marque> getMarqueById(@PathVariable("id") String id) {
         log.debug("REST request to get Marque : {}", id);
         Optional<Marque> marque = marqueService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(marque);
+        return ResponseEntity.accepted().body(marque.get());
     }
 
     @CrossOrigin(origins = "https://khalildiag-web-admin.web.app/")
@@ -70,6 +66,6 @@ public class MarqueResource {
     public ResponseEntity<Void> deleteMarque(@PathVariable("id") String id) {
         log.debug("REST request to delete Marque : {}", id);
         marqueService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent().build();
     }
 }
