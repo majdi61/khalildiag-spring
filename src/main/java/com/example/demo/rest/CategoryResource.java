@@ -29,8 +29,7 @@ public class CategoryResource {
 
     private static final String ENTITY_NAME = "khalildiagCategory";
 
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
+
 
     private final CategoryService categoryService;
 

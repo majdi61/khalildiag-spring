@@ -27,8 +27,6 @@ public class MarqueResource {
 
     private static final String ENTITY_NAME = "khalildiagMarque";
 
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
 
     private final MarqueService marqueService;
 

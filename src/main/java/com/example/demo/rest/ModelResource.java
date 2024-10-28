@@ -27,8 +27,7 @@ public class ModelResource {
 
     private static final String ENTITY_NAME = "khalildiagModel";
 
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
+
 
     private final ModelService modelService;
 

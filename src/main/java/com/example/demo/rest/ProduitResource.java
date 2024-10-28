@@ -35,8 +35,7 @@ public class ProduitResource {
 
     private static final String ENTITY_NAME = "khalildiagProduit";
 
-    @Value("${jhipster.clientApp.name}")
-    private String applicationName;
+
 
     private final ProduitService produitService;
     private final ProduitRepository produitRepository;
