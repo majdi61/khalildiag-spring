@@ -56,4 +56,4 @@ jobs:
         with:
           app-name: 'khalildiag-service'
           slot-name: 'Production'
-          package: '*.jar'  # Update to JAR
+          package: '${{ github.workspace }}/target/*.jar'  # Use full path to ensure it's found
