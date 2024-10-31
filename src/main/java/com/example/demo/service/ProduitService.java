@@ -4,8 +4,7 @@ package com.example.demo.service;
 import com.example.demo.domain.ImgUrl;
 import com.example.demo.domain.Produit;
 import com.example.demo.repository.ProduitRepository;
-import com.example.demo.service.dto.ProduitDto;
-import com.example.demo.service.mapper.ProduitMapper;
+
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +40,6 @@ public class ProduitService {
 
     public Page<Produit> getProduitsPage(Document document, Pageable pageable) {
         Page<Produit> produits = produitRepository.filter(document, pageable);
-
-        // Convert the page of Produit to a page of ProduitDto
         return produits;
     }
 
