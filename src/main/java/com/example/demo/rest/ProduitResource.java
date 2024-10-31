@@ -55,7 +55,6 @@ public class ProduitResource {
     }
 
 
-
     @PostMapping("")
     public ResponseEntity<Produit> saveProduit(@RequestBody Produit produit) throws URISyntaxException {
         Produit result = produitService.save(produit);

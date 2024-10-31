@@ -39,7 +39,13 @@ public class ProduitService {
     }
 
     public Page<Produit> getProduitsPage(Document document, Pageable pageable) {
-        Page<Produit> produits = produitRepository.filter(document, pageable);
+
+
+                document = Optional.ofNullable(document).orElse(new Document());
+                log.debug("doc: {}", document);
+                // add removed = false by default. removed links should be returned in
+                log.debug("doc: {}", document);
+                Page<Produit> produits = produitRepository.filter(document, pageable);
         return produits;
     }
 
